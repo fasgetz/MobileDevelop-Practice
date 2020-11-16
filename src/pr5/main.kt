@@ -16,15 +16,7 @@ import java.io.ObjectOutputStream
 var Persons: MutableList<Student> = mutableListOf<Student>()
 
 fun main(){
-
-
     StartProgram()
-
-
-
-
-
-
 
 }
 
