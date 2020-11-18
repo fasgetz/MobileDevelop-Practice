@@ -23,3 +23,5 @@ fun ss(vararg numbers: Int): () -> Int {
         result
     }
 }
+
+// переделаь

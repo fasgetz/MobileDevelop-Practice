@@ -21,6 +21,10 @@ fun main(){
 
     }
 
+    //res.fold()
+    //reduce fold
+
+
     println(result)
 
 }

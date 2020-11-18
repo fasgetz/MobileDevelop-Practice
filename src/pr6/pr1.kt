@@ -6,22 +6,17 @@ package pr6
 
 fun main(){
     println("test")
-    var nums: MutableList<Int> = mutableListOf<Int>()
 
-    nums.add(8)
-    nums.add(2235)
-    nums.add(235)
-    nums.add(555)
-    nums.add(511)
 
-    var func = SumResults<Int>(nums)
 
-    var abs = func()
-
-    println(abs)
 }
 
-fun <T> SumResults(vararg fs: MutableList<Int>): () -> Int? =
-        {  ->
-            fs.sumBy { it.sum() }
+
+fun <T> SumFunc(vararg fs: (T) -> Int): (T) -> Int =
+        {  arg ->
+
+
+            fs.map { it(arg) }.sum() // сумма
+
+
         }

@@ -21,29 +21,35 @@ fun main(){
 }
 
 fun StartProgram() {
-    var input: Char
+    var input: Char? = null
 
     // Меню
     do  {
         WriteMenu() // Вызываем отрисовку меню
 
-        print("Выберите действие: ")
-        input = readLine()!![0]
-        when(input){
-            '1' -> {
-                AddStudent()
+        try {
+            print("Выберите действие: ")
+            input = readLine()!![0]
+            when(input){
+                '1' -> {
+                    AddStudent()
+                }
+                '3' -> println("функция редактирования")
+                '2' -> DeleteStudent()
+                '4' -> Sorting()
+                '5' -> Search()
+                '6' -> WriteStudents()
+                '7' -> println("Количество студентов ${Persons.count()}")
+                '8' -> Serialize()
+                '9' -> Deserialize()
+                '!' -> println("Завершение программы")
+                else -> println("неопределенное значение")
             }
-            '3' -> println("функция редактирования")
-            '2' -> DeleteStudent()
-            '4' -> Sorting()
-            '5' -> Search()
-            '6' -> WriteStudents()
-            '7' -> println("Количество студентов ${Persons.count()}")
-            '8' -> Serialize()
-            '9' -> Deserialize()
-            '!' -> println("Завершение программы")
-            else -> println("неопределенное значение")
         }
+        catch (e: java.lang.Exception) {
+            println("exception")
+        }
+
 
 
     } while (input != '!')
@@ -66,49 +72,58 @@ fun WriteMenu() {
 
 
 fun DeleteStudent() {
-    var input: Char
+    var input: Char? = null
+
+
 
     // Меню
     do  {
         WriteDeleteStudent() // Вызываем отрисовку меню
 
-        print("Выберите по какому полю удалять: ")
-        input = readLine()!![0]
+        try {
+            print("Выберите по какому полю удалять: ")
+            input = readLine()!![0]
 
-        if (input == '!')
-            break
+            if (input == '!')
+                break
 
-        print("Введите значение: ")
-        var value = readLine()
+            print("Введите значение: ")
+            var value = readLine()
 
-        var findPersons : MutableList<Student> = mutableListOf<Student>()
+            var findPersons : MutableList<Student> = mutableListOf<Student>()
 
-        when(input) {
-            '1' -> {
+            when(input) {
+                '1' -> {
 
-                findPersons = Persons.takeWhile { it.Name == value.toString() }.toMutableList()
+                    findPersons = Persons.takeWhile { it.Name == value.toString() }.toMutableList()
 
 
+                }
+                '2' -> {
+                    findPersons = Persons.takeWhile { it.Family == value.toString() }.toMutableList()
+                }
+                '3' -> {
+                    findPersons = Persons.takeWhile { it.LastName == value.toString() }.toMutableList()
+                }
+                '!' -> println("Выход в главное меню")
+                else -> println("неопределенное значение")
             }
-            '2' -> {
-                findPersons = Persons.takeWhile { it.Family == value.toString() }.toMutableList()
+
+            if (findPersons.count() != 0){
+                println("${findPersons.count()} студентов успешно удалены!")
+                for (person in findPersons)
+                    println(person.infoStudent)
+                Persons.removeAll(findPersons.toList())
             }
-            '3' -> {
-                findPersons = Persons.takeWhile { it.LastName == value.toString() }.toMutableList()
+            else {
+                println("Никто не найден по значению $value")
             }
-            '!' -> println("Выход в главное меню")
-            else -> println("неопределенное значение")
+        }
+        catch (ex: java.lang.Exception) {
+            println("exception")
         }
 
-        if (findPersons.count() != 0){
-            println("${findPersons.count()} студентов успешно удалены!")
-            for (person in findPersons)
-                println(person.infoStudent)
-            Persons.removeAll(findPersons.toList())
-        }
-        else {
-            println("Никто не найден по значению $value")
-        }
+
 
 
     } while (input != '!')
@@ -123,44 +138,50 @@ fun WriteDeleteStudent() {
 }
 
 fun Search() {
-    var input: Char
+    var input: Char? = null
 
     // Меню
     do  {
         WriteSearch() // Вызываем отрисовку меню
 
-        print("Выберите по какому полю искать: ")
-        input = readLine()!![0]
+        try {
+            print("Выберите по какому полю искать: ")
+            input = readLine()!![0]
 
-        if (input == '!')
-            break
+            if (input == '!')
+                break
 
-        print("Введите значение: ")
-        var value = readLine()
+            print("Введите значение: ")
+            var value = readLine()
 
-        var findPersons : MutableList<Student> = mutableListOf<Student>()
+            var findPersons : MutableList<Student> = mutableListOf<Student>()
 
-        when(input) {
-            '1' -> {
-                findPersons = Persons.takeWhile { it.Name == value.toString() }.toMutableList()
+            when(input) {
+                '1' -> {
+                    findPersons = Persons.takeWhile { it.Name == value.toString() }.toMutableList()
+                }
+                '2' -> {
+                    findPersons = Persons.takeWhile { it.Family == value.toString() }.toMutableList()
+                }
+                '3' -> {
+                    findPersons = Persons.takeWhile { it.LastName == value.toString() }.toMutableList()
+                }
+                '!' -> println("Выход в главное меню")
+                else -> println("неопределенное значение")
             }
-            '2' -> {
-                findPersons = Persons.takeWhile { it.Family == value.toString() }.toMutableList()
+
+            if (findPersons.count() != 0){
+                for (person in findPersons)
+                    println(person.infoStudent)
             }
-            '3' -> {
-                findPersons = Persons.takeWhile { it.LastName == value.toString() }.toMutableList()
+            else {
+                println("Никто не найден по значению $value")
             }
-            '!' -> println("Выход в главное меню")
-            else -> println("неопределенное значение")
+        }
+        catch (ex: java.lang.Exception) {
+            println("exception")
         }
 
-        if (findPersons.count() != 0){
-            for (person in findPersons)
-                println(person.infoStudent)
-        }
-        else {
-            println("Никто не найден по значению $value")
-        }
 
 
     } while (input != '!')
@@ -220,33 +241,40 @@ fun WriteStudents() {
 
 fun Sorting() {
 
-    var input: Char
+    var input: Char? = null
 
     // Меню
     do  {
         WriteSortingFunctions() // Вызываем отрисовку меню
 
         print("Выберите по какому полю сортировать: ")
-        input = readLine()!![0]
-        when(input) {
-            '1' -> {
-                Persons.sortBy { it.Name }
+
+        try {
+            input = readLine()!![0]
+            when(input) {
+                '1' -> {
+                    Persons.sortBy { it.Name }
+                }
+                '2' -> {
+                    Persons.sortBy { it.Family }
+                }
+                '3' -> {
+                    Persons.sortBy { it.LastName }
+                }
+                '4' -> {
+                    Persons.sortBy { it.Age }
+                }
+                '5' -> {
+                    Persons.sortBy { it.Gender }
+                }
+                '!' -> println("Выход в главное меню")
+                else -> println("неопределенное значение")
             }
-            '2' -> {
-                Persons.sortBy { it.Family }
-            }
-            '3' -> {
-                Persons.sortBy { it.LastName }
-            }
-            '4' -> {
-                Persons.sortBy { it.Age }
-            }
-            '5' -> {
-                Persons.sortBy { it.Gender }
-            }
-            '!' -> println("Выход в главное меню")
-            else -> println("неопределенное значение")
         }
+        catch (ex: java.lang.Exception) {
+
+        }
+
 
 
     } while (input != '!')

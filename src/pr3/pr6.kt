@@ -19,5 +19,7 @@ fun Fib(number: Int) : Int {
         lm1 = tmp
     }
 
+    //generate sequence - zip
+
     return l
 }

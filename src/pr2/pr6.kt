@@ -7,7 +7,7 @@ fun main(){
 
 
 
-    FunctionM(action(5,5), action(1, 220))
+    //FunctionM(action(5,5), action(1, 220))
 
     for (n in items)
         println("$n")
@@ -25,7 +25,12 @@ fun action (n1: Int, n2: Int) {
 
 }
 
+/*
+fun FunctionM(vararg numbers: (n1: Int) -> Int): (Int) -> Int {
+    //
 
-fun FunctionM(vararg numbers: Unit) {
 
 }
+
+
+ */

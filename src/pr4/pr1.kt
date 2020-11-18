@@ -32,6 +32,11 @@ fun main()
 
 fun arr(input: String) : Boolean
 {
-    val exp = (Regex("[\\s\\t]*([A-Za-z\\d_]+\\s*:)\\s+(\\barray)\\s*(\\[\\d+.{2}\\d+\\])\\s+(\\bof)\\s+(\\binteger|\\bchar|\\breal);"))
+    val exp = (Regex("(^[_a-zA-Z][a-zA-Z0-9]*\\s*:)\\s*(\\barray)\\s*(\\[\\s*(\\s*(-?\\d+\\.\\.-?\\d+|[_a-zA-Z]+[a-zA-Z0-9])(\\s*([,]\\s*?(-?\\d+\\.\\.-?\\d+\\s*|[_a-zA-Z]+[a-zA-Z0-9]\\s*))*?)\\s*\\]))\\s+(\\bof)\\s+(\\binteger|\\bchar|\\breal|\\b[_a-zA-Z][a-zA-Z0-9]+)\\s*?;\$"))
     return exp.matches(input)
 }
+// nameArray : array [1..10] of real;
+// nameArray : array [1..10] of userTypes;
+// test : array [1..10] of real;
+// _NameArray : array [ 1..10 , 15..20 , asdf ,fds ] of realgg;
+// отрицательные числа, индексы по любому названию, название типа базового может быть любым
