@@ -4,37 +4,13 @@ package pr3
 
 fun main(){
 
-    var res = GetListNumbers("1253 2372 2352595 333")
 
 
-    var result = res.first(); // Результат
-
-    for ((index) in res.withIndex()){
-
-        // Если не конец цикла, то побитовое сложение
-        if (res.count() - 1 > index) {
-            val sum = res[index] and res[index + 1]
-
-            result = result and sum;
-
-        }
-
-    }
-
-    //res.fold()
-    //reduce fold
+    var inputStr = "66 77 8525"
+    val sumBit = (inputStr.split(" ").map { it[it.length - 2].toInt() - '0'.toInt() }).reduce{item, item2 -> item and item2}
 
 
-    println(result)
-
-}
+    println(sumBit)
 
 
-fun GetListNumbers(inpStr: String) : List<Int> {
-    val resList = mutableListOf<Int>()
-    inpStr.split(" ").forEach {
-        // Добавляем предпоследний символ в список
-        resList.add(it[it.length - 2].toInt() - '0'.toInt())
-    }
-    return resList
 }

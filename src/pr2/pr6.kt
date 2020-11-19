@@ -1,36 +1,32 @@
 package pr2
 
-// Объявляем массив чисел
-var items = IntArray(10)
+// Создайте функцию, которая по данным функциям с параметром ти-
+//па Int и результатами типа Int возвращает новую функцию – сумму
+// данных (количество исходных функций – любое).
+
+
+
+fun test (Numb: Int = 5): Int {
+    return Numb
+}
+
+fun sum(vararg fs: (Int) -> Int): (Int) -> Int? =
+        { arg ->
+            fs.map { it(arg) }.sum()
+        }
+
 
 fun main(){
 
+    var abs = sum(::test, ::test)
+    //var abs = FuncM()
 
-
+    //var abg = abs(5)
     //FunctionM(action(5,5), action(1, 220))
 
-    for (n in items)
-        println("$n")
-}
-
-
-fun action (n1: Int, n2: Int) {
-
-
-    // Далее присваиваем в элемент массива
-    items[n1!! - 1] = n2
-
-    println("Присвоено")
-
-
-}
-
-/*
-fun FunctionM(vararg numbers: (n1: Int) -> Int): (Int) -> Int {
-    //
-
 
 }
 
 
- */
+
+
