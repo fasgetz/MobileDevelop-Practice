@@ -1,6 +1,11 @@
 package pr1
 
-// ввод с :
+// ввод номер:значение
+fun arr(input: String) : Boolean
+{
+    val exp = (Regex("([0-9]+):([1-9]+)\$"))
+    return exp.matches(input)
+}
 
 fun main(){
 
@@ -9,31 +14,33 @@ fun main(){
 
     while (true){
 
-        print("Введите число 1..10 для элемента массива: ")
-        // Вводим число 1..10 для номера элемента массива
-        val numberElement = InputNumber()
+        print("Заполните массив в формате номер(0-9):значение (для выхода !) - ")
 
-        // Если не ввели соответствующее число, то выйти из цикла
-        if (numberElement !in 1..10){
-            println(numberElement)
-            continue
+        var str = readLine()
+
+
+        val exp = (Regex("([!]|([0-9]+):([1-9]+))\$"))
+
+        if (exp.matches(str.toString()) == true) {
+            println("Регулярка соответствует")
+            // Выход из цикла
+            if (str == "!")
+                break
+
+            val number = str.toString().substring(0, str.toString().indexOf(':'))
+            val value = str.toString().substring(str.toString().indexOf(':') + 1)
+
+            items[number.toInt()] = value.toInt()
+
+
+        }
+        else {
+            println("Регулярка несоответствует")
         }
 
 
-        print("Введите число которое присвоится элементу массива $numberElement: ")
-        // Вводим число, которое внесем в массив
-        val arrayNumb = InputNumber()
 
-        // Если не ввели соответствующее число, то выйти из цикла
-        if (arrayNumb == null)
-            continue
 
-        // Далее присваиваем в элемент массива
-        items[numberElement!! - 1] = arrayNumb
-
-        // Выход из цикла
-        if (arrayNumb == 0)
-            break
 
     }
 
@@ -41,20 +48,5 @@ fun main(){
         println("$n")
 
 
-
-}
-
-// Функция ввода числа
-fun InputNumber(): Int? {
-
-    var number = readLine()
-    var res = number?.toIntOrNull()
-
-    if (res != null)
-        return res
-
-
-    println("Введите число!")
-    return null
 
 }
